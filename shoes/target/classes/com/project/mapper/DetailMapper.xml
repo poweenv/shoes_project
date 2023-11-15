@@ -40,8 +40,8 @@
 	</select>
 	
 	<insert id="cartInsert">
-		insert into carts(cart_id, member_id, product_id,cart_amount,inventory_id)
-		values(carts_seq.nextval, #{memberId},#{productId},#{cartAmount},#{inventoryId})
+		insert into carts(member_id, product_id,cart_amount,inventory_id)
+		values(#{memberId},#{productId},#{cartAmount},#{inventoryId})
 	</insert>
 
 <select id="reviewList" resultType="com.project.domain.ReviewDTO">

@@ -10,7 +10,6 @@ shoesForm.addEventListener("submit", (e) => {
   } else if (size.value === "" && amount === "") {
     alert("사이즈를 선택해주세요");
     return;
-
     //수량 가져오기
   } else {
     var amount = document.getElementById("cartAmount").value;
@@ -20,11 +19,8 @@ shoesForm.addEventListener("submit", (e) => {
       return;
     }
   }
-
   const memberId = document.querySelector("#memberId").value;
   const inventoryId = document.querySelector("#inventoryId").value;
-
-  // 폼 submit
   //사이즈랑 가격,브랜드 보내기
   fetch("/customer/cart", {
     method: "post",
@@ -48,6 +44,5 @@ shoesForm.addEventListener("submit", (e) => {
         throw new Error("카트에 전송 실패");
       }
     })
-
     .catch((error) => console.log(error));
 });
