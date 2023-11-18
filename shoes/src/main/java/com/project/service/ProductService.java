@@ -16,4 +16,7 @@ public interface ProductService {
 	public ProductDTO getSingleProduct(String productId);
 	public boolean modifyProduct(ProductDTO productDTO);
 	public boolean increaseSoldCount(CartDTO cartDTO);
+	
+	public ListPageDTO getDcList(Criteria cri);
+	public int getDcCount(Criteria cri);
 }

@@ -125,4 +125,85 @@
 		update products set sold_count = sold_count + #{cartAmount} where product_id = #{productId}
 	</update>
 
+
+	<!-- Dc 상품 목록 -->
+ 	<select id="getDcList" resultType="com.project.domain.ProductDTO">
+ 		select p.product_id, p.product_name,p.discount_price, p.price, p.colors, p.registered_date, p.sold_count, p.rnum, at.filePath,
+ 			   re.rating, re.reviewCount
+		from (
+			select product_id, product_name,discount_price, price, colors, registered_date, sold_count, row_number() over(order by
+		    <choose>
+		      <when test="order== 'registered-date-desc'">registered_date desc</when>
+		      <when test="order== 'sold-count-desc'">sold_count desc</when>
+		      <when test="order== 'price-desc'">price desc</when>
+		      <when test="order== 'price-asc'">price asc</when>
+		      <otherwise></otherwise>
+		    </choose>
+		) rnum
+	    from products
+	    where on_sale = 1 and discontinued = 0
+	    	<if test="keyword!= ''">
+	    		and (product_name like '%'||#{keyword}||'%' or brand like '%'||#{keyword}||'%' or category like '%'||#{keyword}||'%')
+	    	</if>
+	    	<if test="innerKeyword!= ''">
+	    		and (product_name like '%'||#{innerKeyword}||'%' or brand like '%'||#{innerKeyword}||'%' or category like '%'||#{innerKeyword}||'%')
+	    	</if>
+		    <choose>
+		      <when test="gender== 'for-men'">and for_men=1 </when>
+		      <when test="gender== 'for-women'">and for_women=1 </when>
+		      <otherwise></otherwise>
+		    </choose>
+		    <choose>
+		      <when test="category== 'running'">and category = '운동화'</when>
+		      <when test="category== 'shoes'">and category = '구두'</when>
+		      <when test="category== 'slipper'">and category = '슬리퍼'</when>
+		      <otherwise></otherwise>
+		    </choose>
+		) p 
+		left outer join (
+			select nvl(replace((a.upload_path||'/'||a.uuid||'_'||a.file_name),'\','/'),'/default/txt-file.png') as filePath,
+				   a.product_id
+			from (
+				select upload_path, uuid, file_name, row_number() over (partition by product_id order by file_name asc) rnum, product_id
+				from attachments
+			) a
+			where a.rnum = 1
+		) at on p.product_id = at.product_id
+		left outer join (
+			select avg(nvl(jumsu,0)) as rating, count(review_id) as reviewCount, product_id
+			from reviews
+			group by product_id
+		) re on p.product_id = re.product_id
+		where p.rnum between ((#{page}-1)*#{listAmount})+1 and (#{page}*#{listAmount})
+		order by
+		  <choose>
+		      <when test="order== 'registered-date-desc'">registered_date desc</when>
+		      <when test="order== 'sold-count-desc'">sold_count desc</when>
+		      <when test="order== 'price-desc'">price desc</when>
+		      <when test="order== 'price-asc'">price asc</when>
+		      <otherwise></otherwise>
+		   </choose>
+	</select>
+
+	<select id="getDcCount">
+		select count(*) from products where on_sale = 1 and discontinued = 0
+	    	<if test="keyword!= ''">
+	    		and (product_name like '%'||#{keyword}||'%' or brand like '%'||#{keyword}||'%' or category like '%'||#{keyword}||'%')
+	    	</if>
+	    	<if test="innerKeyword!= ''">
+	    		and (product_name like '%'||#{innerKeyword}||'%' or brand like '%'||#{innerKeyword}||'%' or category like '%'||#{innerKeyword}||'%')
+	    	</if>
+			<choose>
+		      <when test="gender== 'for-men'">and for_men=1 </when>
+		      <when test="gender== 'for-women'">and for_women=1 </when>
+		      <otherwise></otherwise>
+		    </choose>
+		    <choose>
+		      <when test="category== 'running'">and category = '운동화'</when>
+		      <when test="category== 'shoes'">and category = '구두'</when>
+		      <when test="category== 'slipper'">and category = '슬리퍼'</when>
+		      <otherwise></otherwise>
+		    </choose>
+	</select>
+
 </mapper>

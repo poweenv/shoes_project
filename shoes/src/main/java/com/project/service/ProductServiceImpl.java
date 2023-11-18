@@ -79,4 +79,17 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.updateSoldCount(cartDTO)==1 ? true:false;
 	}
 
+	@Override
+	public ListPageDTO getDcList(Criteria cri) {
+		List<ProductDTO> list = productMapper.getDcList(cri);
+		//리스트 순환하면서 별점이랑 리뷰개수 들고오기
+		int productsCount = productMapper.getDcCount(cri);
+		return new ListPageDTO(productsCount, list);
+	}
+
+	@Override
+	public int getDcCount(Criteria cri) {
+		return productMapper.getDcCount(cri);
+	}
+
 }

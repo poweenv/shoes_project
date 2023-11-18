@@ -101,4 +101,28 @@ public class ShopController {
 		ListPageDTO listPageDTO = productService.getProductsList(cri);
 		return new ResponseEntity<ListPageDTO>(listPageDTO, HttpStatus.OK);
 	}
+	
+	@GetMapping("/dcList")
+	public void dcListGet() {
+		log.info("Dc 상품 목록 폼 요청");
+	}
+	@PostMapping("/dcList")
+	public ResponseEntity<ListPageDTO> dcPost(@RequestBody Criteria cri,Model model){
+		log.info("dcList body 요청 "+ cri);
+		ListPageDTO listPageDTO = productService.getDcList(cri);
+		return new ResponseEntity<ListPageDTO>(listPageDTO,HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

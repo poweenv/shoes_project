@@ -83,7 +83,7 @@ https://templatemo.com/tm-559-zay-shop
                             <a class="nav-link" href="/">home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/customer/qna">문의사항</a>
+                            <a class="nav-link" href="/shop/dcList">할인상품</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/shop/list" id="recentProductList">신상품</a>

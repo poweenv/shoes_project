@@ -18,4 +18,8 @@ public interface ProductMapper {
 	public ProductDTO getProduct(String productId);
 	public int updateProduct(ProductDTO productDTO);
 	public int updateSoldCount(CartDTO cartDTO);
+	
+	
+	public List<ProductDTO> getDcList(Criteria cri);
+	public int getDcCount(Criteria cri);
 }
