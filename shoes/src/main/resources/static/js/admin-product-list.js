@@ -12,6 +12,10 @@ document.querySelector(".btn-success").addEventListener("click", () => {
   location.href = "/admin/product/register";
 });
 
+document.querySelector("#dcproduct").addEventListener("click",()=>{
+  location.href= "/admin/product/dcList"
+})
+
 const operForm = document.querySelector("#operForm");
 
 const table = document.querySelector(".product-list-table");

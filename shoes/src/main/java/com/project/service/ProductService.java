@@ -17,6 +17,7 @@ public interface ProductService {
 	public boolean modifyProduct(ProductDTO productDTO);
 	public boolean increaseSoldCount(CartDTO cartDTO);
 	
+	public List<ProductDTO> adminDcList(Criteria cri);
 	public ListPageDTO getDcList(Criteria cri);
 	public int getDcCount(Criteria cri);
 }

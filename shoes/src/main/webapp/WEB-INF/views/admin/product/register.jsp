@@ -48,6 +48,34 @@
 			</div>
 		</div>
      <hr/>
+     <div class="mb-3 row">
+     	<!-- discountPrice는 할인율이라 생각한다. -->
+     	<label for="discountCheckbox" class="col-sm-2 col-form-label"><b>할인 적용</b></label>
+     	<div class="col-sm-2">
+     		<input type="checkbox" class="form-check-input" id="discountCheckbox" name="discountCheckbox">
+     	</div>
+     </div>
+     <div class="mb-3 row" id="discountRateDiv" style="display: none;">
+     	<label for="discountRate" class="col-sm-2 col-form-laber"><b>할인율 선택</b></label>
+     	<div class="col-sm-2">
+     		<select class="form-control" id="discountRate" name="discountRate">
+     			<option value="5">5%</option>
+     			<option value="5">10%</option>
+     			<option value="5">15%</option>
+     			<option value="5">20%</option>
+     			<option value="5">25%</option>
+     			<option value="5">30%</option>
+     			<option value="5">35%</option>
+     			<option value="5">40%</option>
+     			<option value="5">45%</option>
+     			<option value="5">50%</option>
+     			<option value="5">55%</option>
+     			<option value="5">60%</option>
+     			<option value="5">65%</option>
+     			<option value="5">70%</option>
+     		</select>
+     	</div>
+     </div>
         <div class="mb-3 row">
 			  <label for="formControlInput6" class="col-sm-2 col-form-label"><b>제조 국가명</b></label>
 			<div class="col-sm-2">
@@ -148,8 +176,8 @@
 		<button type="button" class="btn btn-secondary">목록으로</button>
 	</form>
 		</div>   
-
         </main>
+</div>
 <script>
 	let colorCount = 1;
 	const pageIsRead = false;

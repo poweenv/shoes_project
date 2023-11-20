@@ -92,4 +92,9 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.getDcCount(cri);
 	}
 
+	@Override
+	public List<ProductDTO> adminDcList(Criteria cri) {
+		return productMapper.adminDcList(cri);
+ 	}
+
 }

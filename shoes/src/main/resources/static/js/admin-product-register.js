@@ -40,3 +40,16 @@ registerForm.addEventListener("submit", (e) => {
   registerForm.insertAdjacentHTML("beforeend", str);
   registerForm.submit();
 });
+
+
+//discountRate 적용
+document.getElementById("discountCheckbox").addEventListener("change",()=>{
+  var discountDiv = document.getElementById("discountRateDiv");
+  if(this.checked){
+    discountDiv.style.display="block";
+  }
+  else{
+    discountDiv.style.display="none";
+  }
+});
+

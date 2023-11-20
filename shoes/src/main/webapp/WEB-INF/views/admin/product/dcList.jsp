@@ -5,10 +5,7 @@
       <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-5 py-2">
-                <h3 class="mt-4 pb-2">상품 목록 조회</h3>
-
-	<button type="button" class="btn btn-success">상품 신규 등록 </button> 
-	<button type="button" class="btn btn-danger" id="dcproduct">할인 상품 목록</button> 
+                <h3 class="mt-4 pb-2">할인 상품 목록</h3>
 		<hr />
 		<div class="form-inline mb-3">
 		    <form action="" id="searchForm">
@@ -44,6 +41,7 @@
 			      <th scope="col">카테고리</th> 
 			      <th scope="col">브랜드</th> 
 			      <th scope="col">가격</th>
+			      <th scope="col">할인된가격</th>
 			      <th scope="col">제조국</th> 
 			      <th scope="col">제조연도</th>
 			      <th scope="col">판매중 여부</th>
@@ -60,6 +58,7 @@
 				      <td class="text-end">${item.category }</td>
 				      <td class="text-end">${item.brand }</td>
 				      <td class="text-end">${item.price}</td>
+				      <td class="text-end">${item.price * (item.discountPrice/100)}</td>
 				      <td class="text-end">${item.productCountry}</td>
 				      <td class="text-end">${item.productYear}</td>
 				      <td class="text-end">${item.onSale?'판매중':'중단'}</td>

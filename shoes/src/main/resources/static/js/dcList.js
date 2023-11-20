@@ -132,6 +132,11 @@ function getList(cri) {
           let rating = Math.floor(item.rating * 10.0) / 10.0;
           let coloredStars = Math.floor(rating);
           let stars = "";
+
+          //discountPrice는 할인율이라고 생각한다
+          var discountAmount = item.price * (item.discountPrice/100);
+          var finalPrice = item.price - discountAmount;
+
           for (let i = 0; i < coloredStars; i++) {
             stars += '<i class="text-warning fa fa-star"></i>';
           }
@@ -168,20 +173,20 @@ function getList(cri) {
             ")" +
             "</span></li>";
           products += "</ul>";
-          if (item.discountPrice <= item.price * 0.7) {
+          if (finalPrice <= item.price * 0.7) {
             // 30% 이상 할인된 경우에 대한 처리
             // 예를 들어, 할인된 상품을 강조하는 CSS 스타일을 적용하거나
             // 할인 정보를 추가적으로 표시하는 등의 작업을 수행
             // 여기서는 단순히 일반 가격에 취소선을 그으며 할인 가격은 빨간색 굵은 글씨로 표시하였습니다.
             products += '<p class="text-center mb-0" style="text-decoration: line-through;">' + item.price + "원</p>";
-            products += '<p class="text-center mb-0" style="color: red; font-weight: bold;">' + item.discountPrice + "원</p>";
+            products += '<p class="text-center mb-0" style="color: red; font-weight: bold;">' + finalPrice + "원</p>";
           } else if (item.discountPrice == 0) {
             // 할인되지 않은 경우
             products += '<p class="text-center mb-0">' + item.price + "원</p>";
           } else {
             // 30% 미만 할인된 경우
             products += '<p class="text-center mb-0" style="text-decoration: line-through;">' + item.price + "원</p>";
-            products += '<p class="text-center mb-0">' + item.discountPrice + "원</p>";
+            products += '<p class="text-center mb-0">' + finalPrice + "원</p>";
           }
           products += "</div>";
           products += "</div>";

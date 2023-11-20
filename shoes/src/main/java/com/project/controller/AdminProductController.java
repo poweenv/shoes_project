@@ -50,6 +50,15 @@ public class AdminProductController {
 		model.addAttribute("productCri", cri);
 	}
 	
+	@GetMapping("/dcList")
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+	public void adminListGet(Model model, Criteria cri) {
+		log.info("상품 목록 요청");
+		List<ProductDTO> list = productService.adminDcList(cri);
+		model.addAttribute("list", list);
+		model.addAttribute("productCri", cri);
+	}
+	
 	@GetMapping("/register")
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	public void productRegisterGet() {

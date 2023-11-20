@@ -98,6 +98,24 @@
 		order by product_id desc
 	</select>
 	
+	<!-- dc상품 목록 관리자 -->
+	<select id="adminDcList">
+		select product_id, product_name, category, brand, price,discount_price, product_country, product_year,
+			   on_sale, sold_count, to_char(registered_date,'yyyy-MM-dd/HH:mm:ss') as registered_date,
+			   to_char(modified_date,'yyyy-MM-dd/HH:mm:ss') as modified_date from products where
+			<choose>
+		      <when test="discontinued==1"> discontinued = 1 </when>
+		      <otherwise>discontinued = 0</otherwise>
+		    </choose>
+		    and discount_price != 0
+			<choose>
+		      <when test="searchType == 'productId'"> and product_id = #{keyword} </when>
+		      <when test="searchType == 'productName'"> and product_name like CONCAT('%',CONCAT(#{keyword},'%')) </when>
+		      <otherwise></otherwise>
+		    </choose>
+		order by product_id desc
+	</select>
+	
 	<insert id="insertProduct">
 		insert into products (product_id, category, brand, detail, price, product_country, product_year, 
 							  product_name, on_sale, sold_count, for_men, for_women, colors)
